@@ -1,0 +1,77 @@
+body {
+ padding:5vw;
+ padding-top:2vw;
+    }
+ #top {
+ width:90vw;
+ height:25vw;
+ }
+img{
+width:30vw;
+height:30vw;
+object-fit:cover;
+border-radius:50%;
+position:absolute;
+top:5vh;
+left:63vw;
+display:block;
+}
+
+#profile-card {
+ width:90vw;
+ border-radius:5px;
+ display:flex;
+ flex-direction:column;
+ }
+
+p {
+position:relative;
+font-size:2.5em;
+margin:20px;
+left:2vw;
+}
+
+#left {
+height:23vh;
+width:70vw;
+background:gray;
+}
+h1 {
+display:inline;
+font-family:cursive;
+font-size:5rem;
+width:30vw;
+margin:2vh;
+}
+
+#contact {
+width:90vw;
+position:relative;
+top:8vh;
+background:gray;
+}
+.botton {
+font-size:3rem;
+}
+#skill {
+position:relative;
+top:8vh;
+background:gray;
+}
+#projects {
+position:relative;
+top:8vh;
+background:gray;
+}
+#last {
+margin:0vh;
+}
+#dots {
+display:flex;
+position:absolute;
+font-size:5rem;
+margin-top:0px;
+background:aqua;
+top:3vh;
+line-height:30px;
+}
