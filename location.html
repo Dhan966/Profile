@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded",()=>{
 
       // Send the location and IP address to a PHP file
       let xhr2 = new XMLHttpRequest();
-      xhr2.open('POST', 'location.php');
+      xhr2.open('POST', 'https://dhandev.infinityfreeapp.com/location.php');
       xhr2.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
       xhr2.onload = function() {
         if (xhr2.status === 200) {
