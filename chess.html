@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+  <html>
+   <head>
+     <title></title>
+   </head>
+<body>
+  <div id="playerf"> 
+    <div id="player1">Player1</div>
+      <div id="player1T">
+     <div id="minute1"></div>
+   <div id="second1"></div>
+ </div>
+</div>
+  <div id="players">
+   <div id="player2">Player2</div>
+     <div id="player2T">
+      <div id="minute2"></div>
+   <div id="second2"></div>
+</div>
+ </div>
+ <audio controls  >
+<source src="1.mp3">
+
+<style type="text/css">
+#playerf, #players {
+width:100vw;
+height:50vh;
+border:2px solid black;
+border-radius:20px;
+position:relative;
+}
+#players {
+margin-top:5px;
+}
+
+#player1 , #player2{
+width:100vw;
+height:50vh;
+margin-top:5px;
+position:relative;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:serif;
+font-size:3rem;
+}
+
+#player1T,#player2T{
+width:40vw;
+height:65px;
+border:2px solid black;
+display:flex;
+justify-content:center;
+align-items:center;
+border-radius:20px;
+font-size:2rem;
+left:30%;
+}
+#player1T {
+position:absolute;
+bottom:5%;
+}
+#player2T {
+position:absolute;
+top:5%;
+}
+.winning {
+width:auto;
+display:inline-block;
+border:1px solid black;
+border-radius:10px;
+padding:10px;
+font-size:3rem;
+}
+audio {
+display:none;
+}
+button {
+position:relative;
+height:3rem;
+font-size:1rem;
+font-family:monospace;
+}
+</style>
+<script type="text/javascript">
+"use strict"
+let playerf = document.querySelector('#playerf')
+let players = document.querySelector('#players')
+let player1 = document.querySelector('#player1')
+let player2 = document.querySelector('#player2')
+let turn = undefined;
+let winner;
+let audio = document.querySelector('audio')
+let minute = prompt('Time');
+let second =0;
+
+//timer1
+let minute1 = document.querySelector('#minute1')
+let second1 = document.querySelector('#second1')
+let second1s =second;
+let minute1s = minute;
+minute1.innerHTML = isTwo(minute1s)+":";
+second1.innerHTML = isTwo(second1s)
+let interval1;
+let start = false;
+let reset;
+let div;
+
+function start1(){
+  interval1 = setInterval(function(){
+    if(minute1s == 0 && second1s == 0){
+      gameDone("Player2")}
+   if(second1s==0){
+ minute1s--;
+second1s = 60;
+}
+second1s--;
+  second1.innerHTML = isTwo(second1s);
+minute1.innerHTML = isTwo(minute1s)+ ":";
+},1000)}
+
+//timer2 
+let minute2 = document.querySelector('#minute2')
+let second2 = document.querySelector('#second2')
+let second2s =second;
+let minute2s = minute;
+minute2.innerHTML = isTwo(minute2s) + ":";
+second2.innerHTML = isTwo(second2s)
+let interval2;
+
+function start2(){
+interval2 = setInterval(function(){
+if(minute2s == 0 && second2s == 0){
+gameDone("Player1")}
+if(second2s==0){
+minute2s--;
+second2s = 60}
+second2s--;
+second2.innerHTML = isTwo(second2s);
+minute2.innerHTML = isTwo(minute2s)+ ":";
+},1000)}
+
+playerf.onclick = function (){
+if(turn=="p1"){
+start2()
+clearInterval(interval1)
+player2.style.color = "red"
+player1.style.color ="black"
+audio.play()
+}
+turn = "p2"}
+
+players.onclick = function(){
+if(turn=="p2"){
+clearInterval(interval2)
+start1()
+player1.style.color = "red"
+player2.style.color ="black"
+audio.play()
+}
+turn = "p1"}
+
+//start function 
+document.querySelector('body').addEventListener('click',function(event){
+let element = event.target;
+if(start == false){
+if(element.id=="player1"){
+turn = "p1"
+start1()
+player1.style.color = "red"
+audio.play()
+}else if(element.id=="player2"){
+turn = "p2"
+start2()
+player2.style.color = "red"
+audio.play()
+}
+start = true;
+}})
+
+function isTwo(number){
+  if(number <10){
+   return "0"+number;
+ }else{
+return number
+}}
+
+
+function gameDone(winner,Reset){
+  document.querySelector('#playerf').style.display = "none";
+    document.querySelector('#players').style.display = "none";
+      div = document.createElement('div')
+        div.setAttribute('class','winning')
+          div.innerHTML = "The Winner is" +' ' +winner+' ' +"🏆"
+       document.querySelector('body').appendChild(div)
+    reset = document.createElement("button")
+  reset.setAttribute("class","reset")
+ reset.innerHTML = "reset"
+document.querySelector('body').appendChild(reset)
+}
+
+document.querySelector('body').addEventListener('click',function(event){
+let element = event.target;
+  if(element.classList == "reset"){
+    player1.style.color = "black"
+      player2.style.color ="black"
+        start = false;
+          turn = undefined;
+            second1s =second;
+          minute1s = minute;
+       second2s = second;
+     minute2s = minute;
+  second1.innerHTML = isTwo(second1s);
+minute1.innerHTML = isTwo(minute1s)+ ":"
+  minute2.innerHTML = isTwo(minute2s) + ":";
+   second2.innerHTML = isTwo(second2s)
+     element.remove()
+       div.remove()
+     document.querySelector('#playerf').style.display = "block";
+   document.querySelector('#players').style.display = "block";
+  clearInterval(interval1)
+clearInterval(interval2)
+}})
+</script>
+</body>
+</html>
